@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+	<meta charset="UTF-8">
+	<title>RemoVision: A Computer Vision Web Application</title>
+	<style>
+		.container {
+			position: relative;
+			margin-right: 250px;
+			margin-left: 70px;
+		}
+		.container2 {
+			position: relative;
+			margin-left: 20px;
+			margin-right: 250px;
+			margin-left: 70px;
+		}
+
+		.border {
+			background-color: #EEF5DB;
+			color: #7A9E9F;
+			height: 20px;
+			border-top: solid 100px #7A9E9F;
+			bo
+		}
+
+		#liveView {
+			position: relative;
+			display: inline-block;
+			top: 70px;
+			left: 0px;
+			height:55px;
+			border-top: solid 1.5px #4F6367;
+			border-bottom: solid 1.5px #4F6367;
+			translateX(-50%);
+		}
+
+		h1 {
+			color: #152238;
+			display: inline-block;
+			position: absolute;
+			top: 40px;
+			left: 10px;
+
+		}
+
+		h1:after {
+
+			display: block;
+			border-bottom: 1.5px solid #7A9E9F;
+			position: relative;
+			content: '';
+			font-size: 22px;
+
+		}
+
+
+
+		h3 {
+			color: black;
+			display: block;
+			position: relative;
+			top: 30px;
+			left: 0px;
+			width: 100%;
+		}
+
+		h4 {
+			color: #EEF5DB;
+			display: inline-block;
+			position: static;
+			top: 30px;
+			left: 30px;
+			width: 100%;
+		}
+
+
+		h4:after {
+
+			display: block;
+			border: 1.5px solid #7A9E9F;
+			position: relative;
+			content: '';
+			font-size: 22px;
+
+		}
+
+		.header-icon {
+			position: relative;
+			float: right;
+			top: 40px;
+			right: 30px;
+			height: 200px;
+			weight: 200px;
+		}
+
+		p.solid {
+			border-style: solid;
+		}
+
+		#colorstrip {
+			height: 0px;
+			border-top: solid 100px #B8D8D8;
+
+		}
+
+		#colorstrip2 {
+			height: 0px;
+			position: static;
+			border-bottom: solid 150px #4F6367;
+		}
+
+
+		input[type=submit] {
+			background-color: #B8D8D8;
+			border: none;
+			color: #152238;
+			padding: 16px 32px;
+			text-decoration: none;
+			margin: 4px 2px;
+			cursor: pointer;
+			display: inline-block;
+		}
+
+		button {
+			background-color: #B8D8D8;
+			border: none;
+			color: #152238;
+			padding: 16px 32px;
+			text-decoration: none;
+			margin: 4px 2px;
+			cursor: pointer;
+			display: inline-block;
+		}
+		a.class1 {color:#EEF5DB;text-decoration: underline;}
+		.bigger { font-size:115%; }
+
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
+
+</head>
+
+<body style="background-color: #EEF5DB;">
+	<img src="{{ url_for('static', filename='cvicon2.png') }}" class="header-icon">
+	<h1 title="Welcome!" >RemoVision </h1>
+	<div id="colorstrip"></div>
+<p style="margin-left: 20px;margin-right: 250px;">This web application is a platform for computer vision features.
+			Click on any of the following buttons to implement these functions! Their details are covered below. More features to be added soon, so stick around!</p>
+
+	<section class="container">
+		<h3 style="font-weight: lighter; font-size:medium; text-align: justify; font-family: SamsungSansSharp;"><b><span class='bigger'>Object Detection:</span></b>
+			It is a computer vision technique that works to identify and locate objects within an image or
+			video. When you click on the button, your webcam will open and the detection algorithm will start recognising different objects in the frame.
+			The algorithm here uses the YOLOv4 model. Simply press escape to terminate the webcam.<br><br>
+			<b><span class='bigger'>Noise Reduction:</span></b> Noise reduction is the process of removing noise from a signal.
+			 Upon clicking the Remove Noise button, a file dialog will open asking you to select a picture. The noise removal algorithm will then be applied to that picture which includes
+			different levels of denoising. The resulting images will then be showed along with the original image to demonstrate the difference.<br><br>
+			<b><span class='bigger'>Background Text Removal:</span></b> This involves removing any text which exits in the background to allow Optical Character Recognition (OCR) to read the
+			main text without any hindrance. Upon clicking the Remove Background Text button, a file dialog will open asking you to select a picture.
+		 The background text will be cleared and the main text in the picture will be recognised using OCR.<br><br>
+			<b><span class='bigger'>Background Removal: </span></b>This detects a person in the image and removes the background by masking it black. Upon clicking the button, you can select an image.
+		The algorithm then works on it and displays the image.<br><br>
+			<b><span class='bigger'>Real-time Removal of People:</span></b> This aims to detect a person and remove them from the frame as they enter using the background cues to help.
+			Click on the button and allow the website to access your camera. You can then see two frames: one being the real footage from your webcam and the second using the algorithm.
+			To terminate the process, close the camera in your settings.</h3>
+		<div id="liveView">
+			<div style="text-align:center;">
+				<form action="/video_feed" style="display:inline-block;">
+					<input type="submit" value="Object Detection" />
+				</form>
+				<form action="/removal1" style="display:inline-block;">
+					<input type="submit" value="Removal of Background Text" />
+				</form>
+				<form action="/denoise" style="display:inline-block;">
+					<input type="submit" value="Noise Removal" />
+				</form>
+				<form action="/removebg" style="display:inline-block;">
+					<input type="submit" value="Background Removal" />
+				</form>
+				<button id="webcamButton">Real-time Removal of People</button>
+				<video id="webcam" autoplay></video>
+			</div>
+					</div>
+
+		<!-- Load the bodypix model to recognize body parts in images -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0"></script>
+
+		<!-- Import the page's JavaScript to do some stuff -->
+		<script src="{{url_for('static', filename='script.js')}}"></script>
+
+	<div id="colorstrip3"></div>
+
+	</section>
+
+
+	<div id="colorstrip2">
+		<h4 style="">Contact us:</h4>
+		<div style="clear: both">
+		<p style="float: left; color:#EEF5DB;position:static; top:900px;">Email:<br><a href=mailto:safas1@amitydubai.ae class="class1">Safa Silat</a></p>
+		<p style="float: left; color:#EEF5DB;position:static; top:900px;left:300px;">GitHub:<br><a href=https://github.com/safa-yalla class="class1">Safa Nadeem</a></p>
+
+</div>
+
+	</div>
+
+	<!--<div class="border">
+    <h6>Contact us:</h6>
+</div>-->
+</body>
+
+</html>
