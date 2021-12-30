@@ -5,11 +5,8 @@ import time
 import tkinter as tk
 from tkinter import filedialog
 
-from django.shortcuts import redirect
 from flask import Flask, url_for,  send_from_directory
 from flask import render_template
-from matplotlib import pyplot as plt
-from PIL import Image, ImageEnhance
 import os
 import argparse
 import sys
