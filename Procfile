@@ -1,1 +1,1 @@
-web: gunicorn app:removision
+web: gunicorn --bind 0.0.0.0:$PORT app:removision
