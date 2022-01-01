@@ -204,11 +204,10 @@ def removebg():
     cv2.imshow('img', masked)  # Display
     cv2.waitKey()
     return render_template("hey.html")
-
+port = int(os.environ.get('PORT', 5000))
 
 
 #cv2.imwrite('C:/Temp/person-masked.jpg', masked)           # Save
 if __name__ == '__main__':
-     port = int(os.environ.get("PORT", 5000))
-   app.run(debug=True, port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
 
