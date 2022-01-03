@@ -21,11 +21,11 @@ def my_form():
 @app.route('/video_feed')
 def video_feed():
     # Load the YOLO model
-    model_weight = "C:\\Users\\cassi\\Downloads\\yolov4.weights"
-    model_cfg = "C:\\Users\\cassi\\Downloads\\yolov4_new.cfg"
+    model_weight = "yolov4-tiny.weights"
+    model_cfg = "yolov4_tiny.cfg"
     net = cv2.dnn.readNet(model_weight, model_cfg)
     classes = []
-    with open("C://Program Files/Microsoft VS Code/bin/project/darknet-test-master/darknet-test-master/coco.names",
+    with open("coco.names",
               "r") as f:
         classes = [line.strip() for line in f.readlines()]
     layer_names = net.getLayerNames()
@@ -104,7 +104,7 @@ def video_feed():
 
 @app.route('/removal1')
 def removal1():
-    pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files (x86)/Tesseract-OCR/tesseract.exe"
+    pytesseract.pytesseract.tesseract_cmd = r"tesseract.exe"
     root = tk.Tk()
     root.withdraw()
     file_path = filedialog.askopenfilename()
