@@ -2,8 +2,7 @@ import cv2
 import numpy as np
 import pytesseract
 import time
-import tkinter as tk
-from tkinter import filedialog
+
 
 from flask import Flask, url_for,  send_from_directory
 from flask import render_template
@@ -105,9 +104,7 @@ def video_feed():
 @app.route('/removal1')
 def removal1():
     pytesseract.pytesseract.tesseract_cmd = r"tesseract.exe"
-    root = tk.Tk()
-    root.withdraw()
-    file_path = filedialog.askopenfilename()
+    file_path = "static/text_img.jpg"
     # Load image, grayscale, Otsu's threshold
     image = cv2.imread(file_path)
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -128,9 +125,7 @@ def removal1():
 
 @app.route('/denoise')
 def denoise():
-    root = tk.Tk()
-    root.withdraw()
-    file_path = filedialog.askopenfilename()
+    file_path = "static/DiscoveryMuseum_NoiseAdded.jpg"
     img = cv2.imread(file_path)
     denoise_1 = cv2.fastNlMeansDenoisingColored(img, None, 3, 3, 7, 21)
     denoise_2 = cv2.fastNlMeansDenoisingColored(img, None, 5, 5, 7, 21)
@@ -157,9 +152,7 @@ def removebg():
     # == Processing =======================================================================
 
     # -- Read image -----------------------------------------------------------------------
-    root = tk.Tk()
-    root.withdraw()
-    file_path = filedialog.askopenfilename()
+    file_path = "static/male-caucasian-person-notebook-looking-260nw-1203432"
     img = cv2.imread(file_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
