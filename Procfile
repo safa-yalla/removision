@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT app:removision
+web: gunicorn -b :$PORT app:app
