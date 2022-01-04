@@ -20,11 +20,11 @@ def my_form():
 @app.route('/video_feed')
 def video_feed():
     # Load the YOLO model
-    model_weight = "./yolov4-tiny.weights"
-    model_cfg = "./yolov4_tiny.cfg"
+    model_weight = "safa-yalla/removision/blob/main/yolov4-tiny.weights"
+    model_cfg = "safa-yalla/removision/blob/main/yolov4_tiny.cfg"
     net = cv2.dnn.readNet(model_weight, model_cfg)
     classes = []
-    with open("./coco.names",
+    with open("safa-yalla/removision/blob/main/coco.names",
               "r") as f:
         classes = [line.strip() for line in f.readlines()]
     layer_names = net.getLayerNames()
@@ -103,8 +103,8 @@ def video_feed():
 
 @app.route('/removal1')
 def removal1():
-    pytesseract.pytesseract.tesseract_cmd = r"./tesseract.exe"
-    file_path = "./static/text_img.jpg"
+    pytesseract.pytesseract.tesseract_cmd = r"safa-yalla/removision/blob/main/tesseract.exe"
+    file_path = "safa-yalla/removision/blob/main/static/text_img.jpg"
     # Load image, grayscale, Otsu's threshold
     image = cv2.imread(file_path)
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -125,7 +125,7 @@ def removal1():
 
 @app.route('/denoise')
 def denoise():
-    file_path = "./static/DiscoveryMuseum_NoiseAdded.jpg"
+    file_path = "safa-yalla/removision/blob/main/static/DiscoveryMuseum_NoiseAdded.jpg"
     img = cv2.imread(file_path)
     denoise_1 = cv2.fastNlMeansDenoisingColored(img, None, 3, 3, 7, 21)
     denoise_2 = cv2.fastNlMeansDenoisingColored(img, None, 5, 5, 7, 21)
@@ -152,7 +152,7 @@ def removebg():
     # == Processing =======================================================================
 
     # -- Read image -----------------------------------------------------------------------
-    file_path = "./static/male-caucasian-person-notebook-looking-260nw-1203432"
+    file_path = "safa-yalla/removision/blob/main/static/male-caucasian-person-notebook-looking-260nw-1203432"
     img = cv2.imread(file_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
