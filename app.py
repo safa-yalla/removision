@@ -20,8 +20,8 @@ def my_form():
 @app.route('/video_feed')
 def video_feed():
     # Load the YOLO model
-    model_weight = "safa-yalla/removision/blob/main/yolov4-tiny.weights"
-    model_cfg = "safa-yalla/removision/blob/main/yolov4_tiny.cfg"
+    model_weight = "C:\Users/cassi/Downloads/yolov4-tiny.weights"
+    model_cfg = "C:/Users/cassi/Downloads/yolov4_new.cfg"
     net = cv2.dnn.readNet(model_weight, model_cfg)
     classes = []
     with open("safa-yalla/removision/blob/main/coco.names",
