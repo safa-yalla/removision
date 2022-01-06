@@ -20,11 +20,11 @@ def my_form():
 @app.route('/video_feed')
 def video_feed():
     # Load the YOLO model
-    model_weight = "C:/Users/cassi/Downloads/yolov4-tiny.weights"
-    model_cfg = "C:/Users/cassi/Downloads/yolov4_new.cfg"
+    model_weight = "safa-yalla/removision/blob/main/yolo/yolov4-tiny.weights"
+    model_cfg = "safa-yalla/removision/blob/main/yolo/yolov4_new.cfg"
     net = cv2.dnn.readNet(model_weight, model_cfg)
     classes = []
-    with open("C:/Users/cassi/PycharmProjects/basiccv/coco.names",
+    with open("safa-yalla/removision/blob/main/coco.names",
               "r") as f:
         classes = [line.strip() for line in f.readlines()]
     layer_names = net.getLayerNames()
