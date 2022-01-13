@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import pytesseract
 import time
-import easygui as g
 
 
 from flask import Flask, url_for,  send_from_directory
@@ -105,8 +104,7 @@ def video_feed():
 @app.route('/removal1')
 def removal1():
     pytesseract.pytesseract.tesseract_cmd = r"safa-yalla/removision/blob/main/tesseract.exe"
-    title = 'Choose your image'
-    file_path = g.fileopenbox(title)
+    file_path = "safa-yalla/removision/blob/main/static/text_img.jpg"
     # Load image, grayscale, Otsu's threshold
     image = cv2.imread(file_path)
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -127,8 +125,7 @@ def removal1():
 
 @app.route('/denoise')
 def denoise():
-    title = 'Choose your image'
-    file_path = g.fileopenbox(title)
+    file_path = "safa-yalla/removision/blob/main/static/DiscoveryMuseum_NoiseAdded.jpg"
     img = cv2.imread(file_path)
     denoise_1 = cv2.fastNlMeansDenoisingColored(img, None, 3, 3, 7, 21)
     denoise_2 = cv2.fastNlMeansDenoisingColored(img, None, 5, 5, 7, 21)
@@ -155,8 +152,7 @@ def removebg():
     # == Processing =======================================================================
 
     # -- Read image -----------------------------------------------------------------------
-    title = 'Choose your image'
-    file_path = g.fileopenbox(title)
+    file_path = "safa-yalla/removision/blob/main/static/male-caucasian-person-notebook-looking-260nw-1203432811.jpg"
     img = cv2.imread(file_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
